@@ -33,9 +33,9 @@ func (l *RedisLock) Lock(ctx context.Context, key, token string) (bool, error) {
 func (l *RedisLock) Unlock(ctx context.Context, key, token string) error {
 	releaseLockScript := redis.NewScript(`
 		if redis.call("get",KEYS[1]) == ARGV[1] then
-    		return redis.call("del",KEYS[1])
+			return redis.call("del",KEYS[1])
 		else
-    		return 0
+			return 0
 		end
 	`)
 
